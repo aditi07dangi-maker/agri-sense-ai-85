@@ -49,7 +49,7 @@ function History() {
                 <div className="mt-2 flex items-center justify-between text-sm"><span>Health <b>{scanHealth(s)}</b></span><span>{Math.round(s.confidence * 100)}%</span></div>
               </div>); })}
           </div>
-          {(() => { const diff = scanHealth(pair[1]) - scanHealth(pair[0]); return (
+          {(() => { const diff = scanHealth(pair[1]!) - scanHealth(pair[0]!); return (
             <p className={cn("mt-3 rounded-xl p-3 text-center text-sm font-bold", diff >= 0 ? "bg-success/15 text-success" : "bg-destructive/10 text-destructive")}>
               Health {diff >= 0 ? "improved" : "dropped"} by {Math.abs(diff)} points
             </p>); })()}

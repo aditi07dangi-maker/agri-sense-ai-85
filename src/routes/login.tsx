@@ -16,14 +16,14 @@ function Login() {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState<string | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent): void => {
     e.preventDefault();
     if (!otp) {
-      if (name.trim().length < 2 || !/^\d{10}$/.test(phone)) return toast.error("Enter your name and a 10-digit mobile number");
+      if (name.trim().length < 2 || !/^\d{10}$/.test(phone)) { toast.error("Enter your name and a 10-digit mobile number"); return; }
       setOtp(""); toast("Demo OTP: 1234");
       return;
     }
-    if (otp !== "1234") return toast.error("Incorrect OTP (demo: 1234)");
+    if (otp !== "1234") { toast.error("Incorrect OTP (demo: 1234)"); return; }
     actions.login(name.trim(), `+91 ${phone}`);
     toast.success(`Welcome, ${name.trim()}!`);
     nav({ to: "/" });

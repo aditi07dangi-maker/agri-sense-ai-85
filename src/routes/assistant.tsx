@@ -17,7 +17,7 @@ type Msg = { role: "user" | "bot"; text: string };
 /** Rule-based demo assistant. Replace `reply` with a call to an LLM server function later. */
 function reply(q: string): string {
   const s = q.toLowerCase();
-  const d = DISEASES.find((x) => s.includes(x.crop) && (s.includes("blight") || s.includes("rust") || s.includes("blast") || s.includes("spot") || s.includes(x.name.toLowerCase().split(" ").slice(-1)[0].toLowerCase())))
+  const d = DISEASES.find((x) => s.includes(x.crop) && (s.includes("blight") || s.includes("rust") || s.includes("blast") || s.includes("spot") || s.includes(x.name.toLowerCase().split(" ").slice(-1)[0]!.toLowerCase())))
     ?? DISEASES.find((x) => s.includes(x.name.toLowerCase()));
   if (d) return `**${d.name}** (${d.pathogen}).\n\nTreatment: ${d.treatment[0]}. ${d.treatment[1] ?? ""}\n\nPrevention: ${d.prevention.join("; ")}.`;
   if (/yellow|पील/.test(s)) return "Yellow leaves can mean nitrogen deficiency, overwatering, or early fungal infection. Check if yellowing starts on older leaves (nutrient) or has spots (disease). Scan the leaf for a precise check.";

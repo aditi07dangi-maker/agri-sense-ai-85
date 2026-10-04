@@ -26,7 +26,7 @@ export function getForecast(location: string): DayForecast[] {
   const names = ["Today", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   return BASE.map((b, i) => {
     const temp = b.temp + offset - 1;
-    return { day: names[i], ...b, temp, risk: riskScore(temp, b.humidity, b.rain) };
+    return { day: names[i]!, ...b, temp, risk: riskScore(temp, b.humidity, b.rain) };
   });
 }
 
