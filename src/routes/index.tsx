@@ -20,7 +20,7 @@ function Dashboard() {
   const health = cropHealth(scans);
   const forecast = getForecast(profile.district);
   const peak = forecast.reduce((a, b) => (b.risk > a.risk ? b : a));
-  const today = forecast[0];
+  const today = forecast[0]!;
   const level = riskLevel(peak.risk);
 
   return (

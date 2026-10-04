@@ -23,10 +23,10 @@ export function LocationPicker() {
   const sel = "w-full rounded-xl border border-input bg-background px-3 py-3 font-medium";
   return (
     <div className="grid gap-2 sm:grid-cols-3">
-      <select aria-label="State" className={sel} value={p.state} onChange={(e) => { const d = Object.keys(STATES[e.target.value])[0]; actions.updateProfile({ state: e.target.value, district: d, village: STATES[e.target.value][d][0] }); }}>
+      <select aria-label="State" className={sel} value={p.state} onChange={(e) => { const st = STATES[e.target.value]!; const d = Object.keys(st)[0]!; actions.updateProfile({ state: e.target.value, district: d, village: st[d]![0]! }); }}>
         {Object.keys(STATES).map((s) => <option key={s}>{s}</option>)}
       </select>
-      <select aria-label="District" className={sel} value={p.district} onChange={(e) => actions.updateProfile({ district: e.target.value, village: STATES[p.state][e.target.value][0] })}>
+      <select aria-label="District" className={sel} value={p.district} onChange={(e) => actions.updateProfile({ district: e.target.value, village: STATES[p.state]![e.target.value]![0]! })}>
         {districts.map((s) => <option key={s}>{s}</option>)}
       </select>
       <select aria-label="Village" className={sel} value={p.village} onChange={(e) => actions.updateProfile({ village: e.target.value })}>
@@ -40,7 +40,7 @@ function Weather() {
   const { t } = useI18n();
   const p = useStore((s) => s.profile);
   const f = getForecast(p.district + p.village);
-  const today = f[0];
+  const today = f[0]!;
   const TodayIcon = ICONS[today.icon];
   const rising = f.findIndex((d, i) => i > 0 && d.risk >= 70);
 
@@ -70,7 +70,7 @@ function Weather() {
           {rising > 0 && (
             <div className="rounded-2xl border border-destructive/30 bg-destructive/10 p-4">
               <p className="flex items-center gap-2 font-bold text-destructive"><TrendingUp className="h-5 w-5" />Smart alert: risk rising</p>
-              <p className="mt-1 text-sm">Risk climbs from {today.risk}% today to {f[rising].risk}% by {f[rising].day}. Spray preventive fungicide <b>before</b> the rain and avoid evening irrigation.</p>
+              <p className="mt-1 text-sm">Risk climbs from {today.risk}% today to {f[rising]!.risk}% by {f[rising]!.day}. Spray preventive fungicide <b>before</b> the rain and avoid evening irrigation.</p>
             </div>
           )}
           <div className="card-soft p-4">

@@ -33,7 +33,7 @@ export const mockClassifier: CropClassifier = {
     const h = hash(imageDataUrl + crop);
     const candidates = [...DISEASES.filter((d) => d.crop === crop).map((d) => d.id), HEALTHY(crop).id];
     const pool = candidates.length > 1 ? candidates : [...candidates, ...DISEASES.slice(0, 2).map((d) => d.id)];
-    const top = pool[h % pool.length];
+    const top = pool[h % pool.length]!;
     // ~1 in 5 scans returns low confidence to demo the uncertainty warning
     const confidence = h % 5 === 0 ? 0.42 + (h % 15) / 100 : 0.72 + (h % 26) / 100;
     const alternatives = pool

@@ -40,9 +40,9 @@ function Scanner() {
   const uploadRef = useRef<HTMLInputElement>(null);
   const camRef = useRef<HTMLInputElement>(null);
 
-  const onFile = async (f?: File) => {
+  const onFile = async (f?: File): Promise<void> => {
     if (!f) return;
-    if (!f.type.startsWith("image/")) return toast.error("Please choose an image file");
+    if (!f.type.startsWith("image/")) { toast.error("Please choose an image file"); return; }
     setImage(await resize(f));
   };
 
